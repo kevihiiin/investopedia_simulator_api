@@ -1,5 +1,3 @@
-from decimal import Decimal
-
 BASE_URL = 'https://www.investopedia.com/simulator'
 PATHS = {
     'portfolio': '/portfolio/',

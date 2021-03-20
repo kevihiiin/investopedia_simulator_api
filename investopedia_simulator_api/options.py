@@ -1,8 +1,10 @@
-import re
-from constants import OPTION_MONTH_CODES
-import datetime
 import calendar
+import datetime
+import re
 from typing import List
+
+from investopedia_simulator_api.constants import OPTION_MONTH_CODES
+
 
 class InvalidOptionChainException(Exception):
     pass
@@ -70,7 +72,7 @@ class OptionContract(object):
             self.contract_type = month_and_type_info['type']
             self.expiration = datetime.date(exp_year,exp_month,exp_day)
             self.contract_name = contract_name
-            
+
             self.last = None
             self.bid = None
             self.ask = None

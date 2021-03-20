@@ -1,17 +1,19 @@
 
-from constants import PATHS, BASE_URL
-#import stock_trade.TradeType
-from urllib import parse
-import re
-from functools import wraps
-import inspect
-from decimal import Decimal
 import copy
-import warnings
 import datetime
-from threading import Thread
+import inspect
 import queue
+import re
 import traceback
+import warnings
+from decimal import Decimal
+from functools import wraps
+from threading import Thread
+# import stock_trade.TradeType
+from urllib import parse
+
+from investopedia_simulator_api.constants import PATHS, BASE_URL
+
 
 class TradeExceedsMaxSharesException(Exception):
     def __init__(self, message, max_shares):
@@ -48,22 +50,22 @@ def date_regex(input_date):
         return input_date
 
     return datetime_obj
-        
+
 
 def coerce_value(value,new_type):
     if type(value) != str and type(value) == new_type:
         return value
-    
+
     if new_type not in (str,Decimal,int):
         return value
-    
+
     value = re.sub('\s+',' ', str(value)).strip()
     if new_type == str:
         return value
 
     if new_type == str:
         return value
-    
+
     if new_type == Decimal:
         return Decimal(re.sub(r'[^\-\d\.]+','',value))
 
@@ -104,7 +106,7 @@ class Util(object):
             return num_str
         return float(re.sub(r'(?:\$|\,|\s|\%)', '', num_str))
 
-        
+
 
 
 

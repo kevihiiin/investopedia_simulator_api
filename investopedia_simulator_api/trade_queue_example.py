@@ -1,7 +1,9 @@
 # This demonstrates the trade queue.  Trades will be validated & executed while concurrently fetching quotes and option chain lookups
-from investopedia_api import InvestopediaApi, TradeExceedsMaxSharesException
-import json
 import datetime
+import json
+
+from investopedia_simulator_api.investopedia_api import InvestopediaApi
+
 
 def choose_option_contract(option_lookup,put=True):
         now = datetime.datetime.now()
@@ -13,7 +15,7 @@ def choose_option_contract(option_lookup,put=True):
             contracts = chain.calls
             if put:
                 contracts = chain.puts
-            
+
             for contract in contracts:
                 if contract.bid/contract.ask > 0.95 and contract.open_int > highest_open_int:
                     chosen = contract

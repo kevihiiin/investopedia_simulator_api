@@ -1,5 +1,5 @@
 ## Description
-A simple Python API for Investopedia's stock simulator games.  
+A simple Python API for Investopedia's stock simulator games.
 
 ## Features
 Currently you can:
@@ -16,7 +16,7 @@ Todo:
 
 
 ## Authentication
-Simply pass a dict to InvetopediaAPI constructor with a username and password.  
+Simply pass a dict to InvetopediaAPI constructor with a username and password.
 ```
 from investopedia_api import InvestopediaApi
 credentials = {"username" "youremail@example.org", "password": "your password"}
@@ -25,7 +25,7 @@ p = client.portfolio
 print("account value: %s" % p.account_value)
 ```
 
-## Environment 
+## Environment
 Python 3.6.7.  I just use a virtualenv and install using pip from requirements.txt.  If you don't know how to do that:
 
 ```
@@ -86,3 +86,10 @@ if trade.validated:
 
 ## More Info / Documentation ##
 This is a work in progress.  I'll add more documentation as I continue developing.  I also plan on making this a module and publishing to pip.
+
+
+## Credits
+
+This package was created with [Cookiecutter](https://github.com/audreyr/cookiecutter) and the
+[`audreyr/cookiecutter-pypackage`](https://github.com/audreyr/cookiecutter-pypackage) project template.
+

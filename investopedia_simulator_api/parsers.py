@@ -1,19 +1,22 @@
-from api_models import Position,LongPosition, ShortPosition, OptionPosition
-from api_models import Portfolio,StockPortfolio,ShortPortfolio,OptionPortfolio,OpenOrder
-from api_models import StockQuote
-from constants import OPTIONS_QUOTE_URL
-from options import OptionChainLookup, OptionChain, OptionContract
-from session_singleton import Session
-from utils import UrlHelper, coerce_value
-from lxml import html
-import json
-import re
-from warnings import warn
-import requests
 import datetime
-from ratelimit import limits,sleep_and_retry
-from decimal import Decimal
+import json
 import logging
+import re
+from decimal import Decimal
+from warnings import warn
+
+import requests
+from lxml import html
+from ratelimit import limits, sleep_and_retry
+
+from investopedia_simulator_api.api_models import LongPosition, ShortPosition, OptionPosition
+from investopedia_simulator_api.api_models import Portfolio, StockPortfolio, ShortPortfolio, OptionPortfolio, OpenOrder
+from investopedia_simulator_api.api_models import StockQuote
+from investopedia_simulator_api.constants import OPTIONS_QUOTE_URL
+from investopedia_simulator_api.options import OptionChainLookup, OptionChain, OptionContract
+from investopedia_simulator_api.session_singleton import Session
+from investopedia_simulator_api.utils import UrlHelper, coerce_value
+
 
 @sleep_and_retry
 @limits(calls=6,period=20)
@@ -84,13 +87,13 @@ def option_lookup(symbol,strike_price_proximity=3):
         expiration = e['ExpirationDate']
         filtered_calls = filter_contracts(e['Calls'],last_price,strike_price_proximity)
         filtered_puts = filter_contracts(e['Puts'],last_price,strike_price_proximity)
-        
+
 
         calls = [OptionContract(o) for o in filtered_calls]
         puts = [OptionContract(o) for o in filtered_puts]
         option_chains.append(OptionChain(expiration,calls=calls,puts=puts))
 
-        
+
     option_chain_lookup = OptionChainLookup(symbol,*option_chains)
     return option_chain_lookup
 
@@ -126,7 +129,7 @@ def stock_quote(symbol):
     except IndexError:
         warn("Unable to parse quote ")
         return
-        
+
 
     exchange_matches = re.search(
         r'^\(([^\)]+)\)$', stock_quote_data['exchange'])
@@ -165,7 +168,7 @@ class CancelOrderWrapper(object):
         print(url)
         session = Session()
         session.get(url)
-        
+
 
 class Parsers(object):
     @staticmethod
@@ -185,7 +188,7 @@ class Parsers(object):
             'quantity': 'td[6]/text()',
             'order_price': 'td[7]/text()',
             'trade_type' : 'td[4]/text()'
-        
+
         }
 
         open_orders = []
@@ -209,7 +212,7 @@ class Parsers(object):
                 except Exception as e:
                     warn("Unable to parse open trade value for %s" % open_order_dict['symbol'])
                     open_order_dict['order_price'] = 0
-                
+
                 open_orders.append(OpenOrder(**open_order_dict))
         return open_orders
 
@@ -249,7 +252,7 @@ class Parsers(object):
         return Portfolio(**portfolio_args)
 
     @staticmethod
-    def parse_and_sort_positions(tree,stock_portfolio,short_portfolio, option_portfolio):        
+    def parse_and_sort_positions(tree,stock_portfolio,short_portfolio, option_portfolio):
         trs = tree.xpath('//table[contains(@class,"table1")]/tbody/tr[not(contains(@class,"expandable")) and not(contains(@class,"no-border"))]')
         xpath_map = {
             'portfolio_id': 'td[1]/div/@data-portfolioid',

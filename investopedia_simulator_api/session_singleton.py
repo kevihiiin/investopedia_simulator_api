@@ -1,9 +1,11 @@
-from utils import UrlHelper
+import re
+import warnings
 
 import requests
 from lxml import html
-import warnings
-import re
+
+from investopedia_simulator_api.utils import UrlHelper
+
 
 class NotLoggedInException(Exception):
     pass
@@ -48,11 +50,11 @@ class Session:
             warnings.warn(
                 "You are already logged in.  If you want to logout call Session.logout().  Returning session")
             return cls.__session
-        
+
         url = 'https://www.investopedia.com/auth/realms/investopedia/shopify-auth/inv-simulator/login?&redirectUrl=https%3A%2F%2Fwww.investopedia.com%2Fauth%2Frealms%2Finvestopedia%2Fprotocol%2Fopenid-connect%2Fauth%3Fresponse_type%3Dcode%26approval_prompt%3Dauto%26redirect_uri%3Dhttps%253A%252F%252Fwww.investopedia.com%252Fsimulator%252Fhome.aspx%26client_id%3Dinv-simulator-conf'
         cls.__session = requests.Session()
         resp = cls.__session.get(url)
-        
+
         tree = html.fromstring(resp.text)
         script_with_url = tree.xpath('//script/text()')[0]
 

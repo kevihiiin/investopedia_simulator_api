@@ -1,11 +1,9 @@
-from api_models import Portfolio
-from parsers import Parsers, option_lookup, stock_quote
-from trade_common import Duration, OrderType, TradeType, Trade
-from trade_common import TradeExceedsMaxSharesException, TradeNotValidatedException, InvalidOrderDurationException, InvalidOrderTypeException, InvalidTradeTypeException
-from option_trade import OptionTrade
-from stock_trade import StockTrade
-from session_singleton import Session
-from utils import TaskQueue, validate_and_execute_trade
+from investopedia_simulator_api.option_trade import OptionTrade
+from investopedia_simulator_api.parsers import Parsers, option_lookup, stock_quote
+from investopedia_simulator_api.session_singleton import Session
+from investopedia_simulator_api.stock_trade import StockTrade
+from investopedia_simulator_api.trade_common import Duration, OrderType, TradeType
+from investopedia_simulator_api.utils import TaskQueue, validate_and_execute_trade
 
 
 class InvestopediaApi(object):

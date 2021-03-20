@@ -1,12 +1,13 @@
-import re
-from titlecase import titlecase
 import copy
-from ratelimit import limits, sleep_and_retry
-from utils import UrlHelper,TradeExceedsMaxSharesException
-from session_singleton import Session
-from lxml import html
-from constants import *
+import re
 import warnings
+
+from lxml import html
+from ratelimit import limits, sleep_and_retry
+from titlecase import titlecase
+
+from investopedia_simulator_api.session_singleton import Session
+from investopedia_simulator_api.utils import UrlHelper, TradeExceedsMaxSharesException
 
 
 class InvalidTradeTypeException(Exception):

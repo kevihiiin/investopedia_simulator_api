@@ -1,10 +1,11 @@
-from trade_common import TradeType, OrderType, Duration, Trade
-from lxml import html
-from ratelimit import limits, sleep_and_retry
-from utils import UrlHelper
-from session_singleton import Session
-import warnings
 import re
+import warnings
+
+from ratelimit import limits, sleep_and_retry
+
+from investopedia_simulator_api.session_singleton import Session
+from investopedia_simulator_api.trade_common import OrderType, Duration, Trade
+from investopedia_simulator_api.utils import UrlHelper
 
 
 class StockTrade(Trade):
