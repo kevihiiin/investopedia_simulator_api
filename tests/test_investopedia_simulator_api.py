@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-"""Tests for `investopedia_simulator_api` package."""
+"""Tests for `investopedia_api` package."""
 
 
 import unittest
 
-from investopedia_simulator_api import investopedia_simulator_api
+from investopedia_api import investopedia_simulator_api
 
 
 class TestInvestopedia_simulator_api(unittest.TestCase):
-    """Tests for `investopedia_simulator_api` package."""
+    """Tests for `investopedia_api` package."""
 
     def setUp(self):
         """Set up test fixtures, if any."""

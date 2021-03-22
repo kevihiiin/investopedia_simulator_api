@@ -2,7 +2,7 @@
 import datetime
 import json
 
-from investopedia_simulator_api.investopedia_api import InvestopediaApi
+from investopedia_api.investopedia_api import InvestopediaApi
 
 
 def choose_option_contract(option_lookup,put=True):

@@ -1,9 +1,9 @@
-from investopedia_simulator_api.option_trade import OptionTrade
-from investopedia_simulator_api.parsers import Parsers, option_lookup, stock_quote
-from investopedia_simulator_api.session_singleton import Session
-from investopedia_simulator_api.stock_trade import StockTrade
-from investopedia_simulator_api.trade_common import Duration, OrderType, TradeType
-from investopedia_simulator_api.utils import TaskQueue, validate_and_execute_trade
+from investopedia_api.option_trade import OptionTrade
+from investopedia_api.parsers import Parsers, option_lookup, stock_quote
+from investopedia_api.session_singleton import Session
+from investopedia_api.stock_trade import StockTrade
+from investopedia_api.trade_common import Duration, OrderType, TradeType
+from investopedia_api.utils import TaskQueue, validate_and_execute_trade
 
 
 class InvestopediaApi(object):

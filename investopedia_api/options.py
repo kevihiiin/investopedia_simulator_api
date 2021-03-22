@@ -3,7 +3,7 @@ import datetime
 import re
 from typing import List
 
-from investopedia_simulator_api.constants import OPTION_MONTH_CODES
+from investopedia_api.constants import OPTION_MONTH_CODES
 
 
 class InvalidOptionChainException(Exception):

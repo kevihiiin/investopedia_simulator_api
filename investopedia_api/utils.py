@@ -9,10 +9,9 @@ import warnings
 from decimal import Decimal
 from functools import wraps
 from threading import Thread
-# import stock_trade.TradeType
 from urllib import parse
 
-from investopedia_simulator_api.constants import PATHS, BASE_URL
+from investopedia_api.constants import PATHS, BASE_URL
 
 
 class TradeExceedsMaxSharesException(Exception):

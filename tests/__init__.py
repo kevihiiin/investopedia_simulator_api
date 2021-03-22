@@ -1,1 +1,1 @@
-"""Unit test package for investopedia_simulator_api."""
+"""Unit test package for investopedia_api."""

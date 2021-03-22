@@ -6,8 +6,8 @@ from lxml import html
 from ratelimit import limits, sleep_and_retry
 from titlecase import titlecase
 
-from investopedia_simulator_api.session_singleton import Session
-from investopedia_simulator_api.utils import UrlHelper, TradeExceedsMaxSharesException
+from investopedia_api.session_singleton import Session
+from investopedia_api.utils import UrlHelper, TradeExceedsMaxSharesException
 
 
 class InvalidTradeTypeException(Exception):
@@ -30,7 +30,7 @@ def convert_trade_props(func):
     @wraps(func)
     def wrapper(self, *arg, **kwargs):
         copy_kwargs = copy.deepcopy(kwargs)
-        copy_kwargs.update(dict(zip(func.__code__.co_varnames[1:], args)))
+        copy_kwargs.update(dict(zip(func.__code__.co_varnames[1:], arg)))
         trade_type = copy_kwargs.get('trade_type', None)
         order_type = copy_kwargs.get('order_type', None)
         duration = copy_kwargs.get('duration', None)
@@ -42,7 +42,7 @@ def convert_trade_props(func):
         if duration is not None and type(duration) == str:
             copy_kwargs['duration'] = Duration(duration)
 
-        return func(self, **copy_kwrags)
+        return func(self, **copy_kwargs)
     return wrapper
 
 
@@ -405,7 +405,7 @@ class Trade(object):
         try:
             assert self.security_type == 'stock' or self.security_type == 'option'
         except AssertionError:
-            raise InvalidTradeException(
+            raise InvalidTradeTypeException(
                 "security type is not specified.  Must be either 'stock' or 'option'")
 
         if self.security_type == 'stock':
@@ -413,13 +413,13 @@ class Trade(object):
                 assert self.trade_type in (
                     'BUY', 'SELL', 'SELL_SHORT', 'BUY_TO_COVER')
             except AssertionError:
-                raise InvalidTradeException(
+                raise InvalidTradeTypeException(
                     "A stock's trade type must be one of the following: BUY,SELL,SELL_SHORT,BUY_TO_COVER.  Got %s " % self.trade_type)
         if self.security_type == 'option':
             try:
                 assert self.trade_type in ('BUY_TO_OPEN', 'SELL_TO_CLOSE')
             except AssertionError:
-                raise InvalidTradeException(
+                raise InvalidTradeTypeException(
                     "An option's trade type must be one of the following: BUY_TO_OPEN,SELL_TO_CLOSE")
         try:
             max_shares = self._get_max_shares()

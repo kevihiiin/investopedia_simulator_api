@@ -1,8 +1,10 @@
 import datetime
 
-from investopedia_simulator_api.option_trade import OptionTrade
-from investopedia_simulator_api.stock_trade import StockTrade
-from investopedia_simulator_api.utils import subclass_method, coerce_method_params, date_regex
+from decimal import Decimal
+
+from investopedia_api.option_trade import OptionTrade
+from investopedia_api.stock_trade import StockTrade
+from investopedia_api.utils import subclass_method, coerce_method_params, date_regex
 
 
 class OpenOrder(object):

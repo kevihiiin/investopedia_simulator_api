@@ -4,7 +4,7 @@ import warnings
 import requests
 from lxml import html
 
-from investopedia_simulator_api.utils import UrlHelper
+from investopedia_api.utils import UrlHelper
 
 
 class NotLoggedInException(Exception):

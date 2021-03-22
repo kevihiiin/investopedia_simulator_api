@@ -3,9 +3,9 @@ import warnings
 
 from ratelimit import limits, sleep_and_retry
 
-from investopedia_simulator_api.session_singleton import Session
-from investopedia_simulator_api.trade_common import OrderType, Duration, Trade
-from investopedia_simulator_api.utils import UrlHelper
+from investopedia_api.session_singleton import Session
+from investopedia_api.trade_common import OrderType, Duration, Trade
+from investopedia_api.utils import UrlHelper
 
 
 class StockTrade(Trade):

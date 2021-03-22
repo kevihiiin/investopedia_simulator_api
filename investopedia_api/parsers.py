@@ -9,13 +9,13 @@ import requests
 from lxml import html
 from ratelimit import limits, sleep_and_retry
 
-from investopedia_simulator_api.api_models import LongPosition, ShortPosition, OptionPosition
-from investopedia_simulator_api.api_models import Portfolio, StockPortfolio, ShortPortfolio, OptionPortfolio, OpenOrder
-from investopedia_simulator_api.api_models import StockQuote
-from investopedia_simulator_api.constants import OPTIONS_QUOTE_URL
-from investopedia_simulator_api.options import OptionChainLookup, OptionChain, OptionContract
-from investopedia_simulator_api.session_singleton import Session
-from investopedia_simulator_api.utils import UrlHelper, coerce_value
+from investopedia_api.api_models import LongPosition, ShortPosition, OptionPosition
+from investopedia_api.api_models import Portfolio, StockPortfolio, ShortPortfolio, OptionPortfolio, OpenOrder
+from investopedia_api.api_models import StockQuote
+from investopedia_api.constants import OPTIONS_QUOTE_URL
+from investopedia_api.options import OptionChainLookup, OptionChain, OptionContract
+from investopedia_api.session_singleton import Session
+from investopedia_api.utils import UrlHelper, coerce_value
 
 
 @sleep_and_retry
