@@ -19,6 +19,7 @@ requirements = [
     'requests==2.21.0',
     'titlecase==0.12.0',
     'urllib3==1.24.2',
+    'wheel==0.36.2',
 ]
 
 setup_requirements = []
